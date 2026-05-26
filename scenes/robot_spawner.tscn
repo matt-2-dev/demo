@@ -1,0 +1,80 @@
+[gd_scene format=3 uid="uid://2qdfwgtqwrnk"]
+
+[ext_resource type="Script" uid="uid://d3mdnta5yqsvq" path="res://scripts/robot_spawner.gd" id="1_3utns"]
+[ext_resource type="PackedScene" uid="uid://rh72uciyx4b8" path="res://scenes/robot.tscn" id="2_6v6yy"]
+
+[node name="Node2D" type="Node2D" unique_id=911483736 node_paths=PackedStringArray("spawn_point", "spawn_timer")]
+script = ExtResource("1_3utns")
+spawn_point = NodePath("Marker2D")
+spawn_timer = NodePath("Timer")
+robot = ExtResource("2_6v6yy")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1446707374]
+offset_left = -104.0
+offset_top = 57.0
+offset_right = 84.0
+offset_bottom = 93.0
+
+[node name="ColorRect2" type="ColorRect" parent="." unique_id=5496926]
+offset_left = 84.0
+offset_top = -132.0
+offset_right = 121.0
+offset_bottom = 93.0
+
+[node name="ColorRect3" type="ColorRect" parent="." unique_id=1876414686]
+offset_left = -105.0
+offset_top = -132.0
+offset_right = 88.0
+offset_bottom = -97.0
+
+[node name="ColorRect5" type="ColorRect" parent="." unique_id=1252947798]
+offset_left = -79.0
+offset_top = -222.0
+offset_right = -65.0
+offset_bottom = -124.0
+
+[node name="ColorRect6" type="ColorRect" parent="." unique_id=1066752660]
+offset_left = -44.0
+offset_top = -222.0
+offset_right = -30.0
+offset_bottom = -125.0
+
+[node name="ColorRect7" type="ColorRect" parent="." unique_id=2086115991]
+offset_left = -69.0
+offset_top = -195.0
+offset_right = -42.0
+offset_bottom = -121.0
+
+[node name="ColorRect8" type="ColorRect" parent="." unique_id=381401950]
+offset_left = 29.0
+offset_top = -222.0
+offset_right = 43.0
+offset_bottom = -124.0
+
+[node name="ColorRect9" type="ColorRect" parent="." unique_id=1483192694]
+offset_left = 64.0
+offset_top = -222.0
+offset_right = 78.0
+offset_bottom = -125.0
+
+[node name="ColorRect10" type="ColorRect" parent="." unique_id=378563578]
+offset_left = 39.0
+offset_top = -195.0
+offset_right = 66.0
+offset_bottom = -121.0
+
+[node name="ColorRect4" type="ColorRect" parent="." unique_id=341698663]
+offset_left = -105.0
+offset_top = -97.0
+offset_right = -88.0
+offset_bottom = 57.0
+color = Color(0.8367553, 0.8367553, 0.8367551, 1)
+
+[node name="Marker2D" type="Marker2D" parent="." unique_id=1230450223]
+position = Vector2(-1, 0)
+
+[node name="Timer" type="Timer" parent="." unique_id=808558959]
+wait_time = 2.0
+one_shot = true
+
+[connection signal="timeout" from="Timer" to="." method="_cooldown"]

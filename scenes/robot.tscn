@@ -1,0 +1,111 @@
+[gd_scene format=3 uid="uid://rh72uciyx4b8"]
+
+[ext_resource type="Script" uid="uid://d10ukrvhumdbg" path="res://scripts/robot.gd" id="1_br0rw"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gl0xr"]
+size = Vector2(79, 100.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ykvnc"]
+size = Vector2(80, 101)
+
+[node name="CharacterBody2D" type="CharacterBody2D" unique_id=952680712 groups=["enemy"]]
+script = ExtResource("1_br0rw")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=2092103073]
+offset_left = -39.0
+offset_top = -44.0
+offset_right = 40.0
+offset_bottom = 36.0
+color = Color(1, 0.30588236, 0.1764706, 1)
+
+[node name="ColorRect7" type="ColorRect" parent="." unique_id=990217179]
+offset_left = -39.0
+offset_top = 31.0
+offset_right = -16.0
+offset_bottom = 57.0
+color = Color(1, 0.30588236, 0.1764706, 1)
+
+[node name="ColorRect8" type="ColorRect" parent="." unique_id=1607156986]
+offset_left = 17.0
+offset_top = 31.0
+offset_right = 40.0
+offset_bottom = 57.0
+color = Color(1, 0.30588236, 0.1764706, 1)
+
+[node name="ColorRect9" type="ColorRect" parent="." unique_id=1130026703]
+offset_left = 40.0
+offset_top = -28.0
+offset_right = 80.0
+offset_bottom = -16.0
+color = Color(1, 0.30588236, 0.1764706, 1)
+
+[node name="ColorRect10" type="ColorRect" parent="." unique_id=141990816]
+offset_left = 66.0
+offset_top = -16.0
+offset_right = 80.0
+offset_bottom = 5.0
+color = Color(1, 0.30588236, 0.1764706, 1)
+
+[node name="ColorRect11" type="ColorRect" parent="." unique_id=1032072153]
+offset_left = -79.0
+offset_top = -27.0
+offset_right = -39.0
+offset_bottom = -15.0
+color = Color(1, 0.30588236, 0.1764706, 1)
+
+[node name="ColorRect12" type="ColorRect" parent="." unique_id=1015208381]
+offset_left = -79.0
+offset_top = -15.0
+offset_right = -65.0
+offset_bottom = 6.0
+color = Color(1, 0.30588236, 0.1764706, 1)
+
+[node name="ColorRect2" type="ColorRect" parent="." unique_id=1966342916]
+offset_left = -32.0
+offset_top = -74.0
+offset_right = 31.0
+offset_bottom = -57.0
+color = Color(1, 0.30588236, 0.1764706, 1)
+
+[node name="ColorRect3" type="ColorRect" parent="." unique_id=149904104]
+offset_left = -9.0
+offset_top = -58.0
+offset_right = 7.0
+offset_bottom = -44.0
+color = Color(1, 0.30588236, 0.1764706, 1)
+
+[node name="ColorRect4" type="ColorRect" parent="." unique_id=147886967]
+offset_left = -29.0
+offset_top = -73.0
+offset_right = -13.0
+offset_bottom = -59.0
+
+[node name="ColorRect5" type="ColorRect" parent="." unique_id=1582166568]
+offset_left = 12.0
+offset_top = -73.0
+offset_right = 28.0
+offset_bottom = -59.0
+
+[node name="ColorRect6" type="ColorRect" parent="." unique_id=1249043975]
+offset_left = -36.0
+offset_top = -42.0
+offset_right = 37.0
+offset_bottom = -14.0
+
+[node name="ColorRect13" type="ColorRect" parent="." unique_id=313850722]
+offset_left = -36.0
+offset_top = -11.0
+offset_right = 37.0
+offset_bottom = 34.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1094852306]
+position = Vector2(1, 6.75)
+shape = SubResource("RectangleShape2D_gl0xr")
+
+[node name="Area2D" type="Area2D" parent="." unique_id=1959569375 groups=["enemy"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=321091738]
+position = Vector2(1, 6.5)
+shape = SubResource("RectangleShape2D_ykvnc")
+
+[connection signal="body_entered" from="Area2D" to="." method="_robot_damage"]

@@ -1,0 +1,58 @@
+[gd_scene format=3 uid="uid://d4jjkkbqn25am"]
+
+[ext_resource type="PackedScene" uid="uid://bdrm06dfgdld0" path="res://scenes/player.tscn" id="1_4exd7"]
+[ext_resource type="PackedScene" uid="uid://cuc18iopof07v" path="res://scenes/fake_tower.tscn" id="2_ic6my"]
+[ext_resource type="PackedScene" uid="uid://2qdfwgtqwrnk" path="res://scenes/robot_spawner.tscn" id="3_qsrgx"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_evtob"]
+size = Vector2(3079, 647)
+
+[node name="Node2D" type="Node2D" unique_id=1893233345]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=1622978021]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=2103379237]
+position = Vector2(561.5, 817.5)
+shape = SubResource("RectangleShape2D_evtob")
+
+[node name="CharacterBody2D" parent="." unique_id=987319902 instance=ExtResource("1_4exd7")]
+top_level = true
+position = Vector2(782, 475)
+
+[node name="Camera2D" type="Camera2D" parent="CharacterBody2D" unique_id=66485005]
+position = Vector2(4, 16)
+zoom = Vector2(0.77, 0.77)
+
+[node name="Node2D" parent="." unique_id=1737197597 instance=ExtResource("2_ic6my")]
+position = Vector2(401, 484)
+
+[node name="Node2D2" parent="." unique_id=255984123 instance=ExtResource("2_ic6my")]
+position = Vector2(535, 484)
+
+[node name="Node2D3" parent="." unique_id=1931551667 instance=ExtResource("2_ic6my")]
+position = Vector2(668, 485)
+
+[node name="Node2D4" parent="." unique_id=1204627056 instance=ExtResource("2_ic6my")]
+position = Vector2(814, 486)
+
+[node name="Node2D5" parent="." unique_id=345531923 instance=ExtResource("2_ic6my")]
+position = Vector2(281, 484)
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1343238551]
+offset_left = -983.0
+offset_top = 494.0
+offset_right = 2117.0
+offset_bottom = 1141.0
+color = Color(0.781407, 0.781407, 0.78140694, 1)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1653886899]
+
+[node name="Node2D6" parent="." unique_id=911483736 instance=ExtResource("3_qsrgx")]
+position = Vector2(1156, 400)
+
+[node name="NinePatchRect" type="NinePatchRect" parent="." unique_id=1929630137]
+offset_left = 223.0
+offset_top = 134.0
+offset_right = 416.0
+offset_bottom = 288.0
+pivot_offset = Vector2(-659, 178)

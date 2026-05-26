@@ -1,0 +1,29 @@
+[gd_scene format=3 uid="uid://bdrm06dfgdld0"]
+
+[ext_resource type="Script" uid="uid://ct2mn2vkofeu0" path="res://scripts/player.gd" id="1_3vyb7"]
+[ext_resource type="PackedScene" uid="uid://c03r2qa38n527" path="res://scenes/bullet.tscn" id="2_g2els"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_u8vuu"]
+size = Vector2(40, 40)
+
+[node name="CharacterBody2D" type="CharacterBody2D" unique_id=987319902 node_paths=PackedStringArray("bullet_spawn", "pivot")]
+script = ExtResource("1_3vyb7")
+bullet_scene = ExtResource("2_g2els")
+bullet_spawn = NodePath("Node2D/Marker2D")
+pivot = NodePath("Node2D")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1509100320]
+offset_left = -20.0
+offset_top = -21.0
+offset_right = 20.0
+offset_bottom = 19.0
+color = Color(0.61542195, 0.61542195, 0.61542195, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=160675688]
+position = Vector2(0, -1)
+shape = SubResource("RectangleShape2D_u8vuu")
+
+[node name="Node2D" type="Node2D" parent="." unique_id=1495079912]
+
+[node name="Marker2D" type="Marker2D" parent="Node2D" unique_id=793465613]
+position = Vector2(21, 0)
