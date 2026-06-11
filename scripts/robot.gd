@@ -1,15 +1,15 @@
 extends CharacterBody2D
 
 
-const SPEED = 300.0
+const SPEED = 280.0
 var health = 2
 @export var speed: float = 350.0
-@onready var player = get_tree().get_first_node_in_group("player")
-
-func _physics_process(delta):
+var player
+func _ready() -> void:
+	player = get_tree().get_first_node_in_group("player")
+func _physics_process(delta) -> void:
 	if player == null:
 		return
-
 	# Calculate direction toward player
 	var direction = (player.global_position - global_position).normalized()
 

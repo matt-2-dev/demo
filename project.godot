@@ -11,8 +11,13 @@ config_version=5
 [application]
 
 config/name="The Tower"
+run/main_scene="uid://d4jjkkbqn25am"
 config/features=PackedStringArray("4.6", "Forward Plus")
 config/icon="res://icon.svg"
+
+[global_group]
+
+player=""
 
 [input]
 

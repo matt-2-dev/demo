@@ -7,6 +7,9 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_evtob"]
 size = Vector2(3079, 647)
 
+[sub_resource type="LabelSettings" id="LabelSettings_qsrgx"]
+font_size = 31
+
 [node name="Node2D" type="Node2D" unique_id=1893233345]
 
 [node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=1622978021]
@@ -47,12 +50,13 @@ color = Color(0.781407, 0.781407, 0.78140694, 1)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1653886899]
 
+[node name="Label" type="Label" parent="CanvasLayer" unique_id=1675443080]
+offset_left = 46.0
+offset_top = 84.0
+offset_right = 174.0
+offset_bottom = 128.0
+text = "Points: 0"
+label_settings = SubResource("LabelSettings_qsrgx")
+
 [node name="Node2D6" parent="." unique_id=911483736 instance=ExtResource("3_qsrgx")]
 position = Vector2(1156, 400)
-
-[node name="NinePatchRect" type="NinePatchRect" parent="." unique_id=1929630137]
-offset_left = 223.0
-offset_top = 134.0
-offset_right = 416.0
-offset_bottom = 288.0
-pivot_offset = Vector2(-659, 178)

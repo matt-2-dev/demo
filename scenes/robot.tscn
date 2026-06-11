@@ -9,6 +9,7 @@ size = Vector2(79, 100.5)
 size = Vector2(80, 101)
 
 [node name="CharacterBody2D" type="CharacterBody2D" unique_id=952680712 groups=["enemy"]]
+collision_layer = 2
 script = ExtResource("1_br0rw")
 
 [node name="ColorRect" type="ColorRect" parent="." unique_id=2092103073]

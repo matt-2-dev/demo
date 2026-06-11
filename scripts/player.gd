@@ -8,7 +8,8 @@ var jump_player: float = -450.0
 @export var bullet_spawn: Marker2D
 @export var pivot: Node2D
 
-
+func _ready() -> void:
+	add_to_group("player")
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	if not is_on_floor():

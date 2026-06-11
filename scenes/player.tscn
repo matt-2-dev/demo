@@ -6,7 +6,8 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_u8vuu"]
 size = Vector2(40, 40)
 
-[node name="CharacterBody2D" type="CharacterBody2D" unique_id=987319902 node_paths=PackedStringArray("bullet_spawn", "pivot")]
+[node name="CharacterBody2D" type="CharacterBody2D" unique_id=987319902 node_paths=PackedStringArray("bullet_spawn", "pivot") groups=["player"]]
+collision_layer = 2
 script = ExtResource("1_3vyb7")
 bullet_scene = ExtResource("2_g2els")
 bullet_spawn = NodePath("Node2D/Marker2D")
