@@ -9,10 +9,10 @@ size = Vector2(40, 40)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_g2els"]
 size = Vector2(40, 40)
 
-[node name="CharacterBody2D" type="CharacterBody2D" unique_id=987319902 node_paths=PackedStringArray("bullet_spawn", "pivot") groups=["player"]]
-collision_layer = 2
+[node name="CharacterBody2D" type="CharacterBody2D" unique_id=987319902 node_paths=PackedStringArray("player", "bullet_spawn", "pivot") groups=["player"]]
 script = ExtResource("1_3vyb7")
 bullet_scene = ExtResource("2_g2els")
+player = NodePath(".")
 bullet_spawn = NodePath("Node2D/Marker2D")
 pivot = NodePath("Node2D")
 
@@ -32,10 +32,11 @@ shape = SubResource("RectangleShape2D_u8vuu")
 [node name="Marker2D" type="Marker2D" parent="Node2D" unique_id=793465613]
 position = Vector2(21, 0)
 
-[node name="Area2D" type="Area2D" parent="." unique_id=744278824]
+[node name="PlayerAreaHitbox" type="Area2D" parent="." unique_id=744278824]
+collision_mask = 2
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1016852946]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerAreaHitbox" unique_id=1016852946]
 position = Vector2(0, -1)
 shape = SubResource("RectangleShape2D_g2els")
 
-[connection signal="body_entered" from="Area2D" to="." method="_player_damage"]
+[connection signal="area_entered" from="PlayerAreaHitbox" to="." method="_player_damage"]

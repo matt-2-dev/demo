@@ -8,5 +8,7 @@ func _process(delta: float) -> void:
 
 
 func _touch(body: Node2D) -> void:
+	print(body.name)
+	print(body.is_in_group("enemy"))
 	if body.is_in_group("enemy"):
 		queue_free()

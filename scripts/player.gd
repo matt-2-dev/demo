@@ -40,8 +40,9 @@ func spawn_bullet() -> void:
 	add_sibling(b)
 
 
-func _player_damage(body: Node2D) -> void:
-	if body.is_in_group("enemy"):
+func _player_damage(area: Area2D) -> void:
+	print("touch:", area.name)
+	if area.is_in_group("enemy"):
 		health -=1
 	elif health == 0:
 		get_tree().reload_current_scene()
