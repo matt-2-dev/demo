@@ -2,6 +2,7 @@ extends CharacterBody2D
 
 var speed_player: float = 500.0
 var jump_player: float = -450.0
+var health: int = 5
 
 @export var bullet_scene: PackedScene
 @export var player: Node
@@ -37,3 +38,10 @@ func spawn_bullet() -> void:
 	b.rotation = bullet_spawn.rotation
 	b.global_position = bullet_spawn.global_position
 	add_sibling(b)
+
+
+func _player_damage(body: Node2D) -> void:
+	if body.is_in_group("enemy"):
+		health -=1
+	elif health == 0:
+		get_tree().reload_current_scene()

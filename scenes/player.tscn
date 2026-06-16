@@ -6,6 +6,9 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_u8vuu"]
 size = Vector2(40, 40)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_g2els"]
+size = Vector2(40, 40)
+
 [node name="CharacterBody2D" type="CharacterBody2D" unique_id=987319902 node_paths=PackedStringArray("bullet_spawn", "pivot") groups=["player"]]
 collision_layer = 2
 script = ExtResource("1_3vyb7")
@@ -28,3 +31,11 @@ shape = SubResource("RectangleShape2D_u8vuu")
 
 [node name="Marker2D" type="Marker2D" parent="Node2D" unique_id=793465613]
 position = Vector2(21, 0)
+
+[node name="Area2D" type="Area2D" parent="." unique_id=744278824]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1016852946]
+position = Vector2(0, -1)
+shape = SubResource("RectangleShape2D_g2els")
+
+[connection signal="body_entered" from="Area2D" to="." method="_player_damage"]
