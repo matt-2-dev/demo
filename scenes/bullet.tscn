@@ -5,7 +5,7 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_h1aey"]
 size = Vector2(35, 10)
 
-[node name="Area2D" type="Area2D" unique_id=1530547338 groups=["bullet"]]
+[node name="Bullet" type="Area2D" unique_id=1530547338 groups=["bullet"]]
 script = ExtResource("1_mkf8s")
 
 [node name="ColorRect" type="ColorRect" parent="." unique_id=1635922260]

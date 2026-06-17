@@ -8,7 +8,9 @@ size = Vector2(79, 100.5)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ykvnc"]
 size = Vector2(80, 101)
 
-[node name="CharacterBody2D" type="CharacterBody2D" unique_id=952680712 groups=["enemy"]]
+[node name="Robot" type="CharacterBody2D" unique_id=952680712 groups=["enemy"]]
+collision_layer = 4
+collision_mask = 2
 script = ExtResource("1_br0rw")
 
 [node name="ColorRect" type="ColorRect" parent="." unique_id=2092103073]
@@ -108,5 +110,4 @@ shape = SubResource("RectangleShape2D_gl0xr")
 position = Vector2(1, 6.5)
 shape = SubResource("RectangleShape2D_ykvnc")
 
-[connection signal="area_entered" from="RobotAreaHitbox" to="." method="_on_area_entered"]
-[connection signal="area_exited" from="RobotAreaHitbox" to="." method="_on_area_exited"]
+[connection signal="area_entered" from="RobotAreaHitbox" to="." method="_bullet_hit"]
