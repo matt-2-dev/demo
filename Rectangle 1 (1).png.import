@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://4jedjqajm5or"
-path="res://.godot/imported/square-pause.png-5c83281bf9d7caa5294a1ffb642d8b2f.ctex"
+uid="uid://c5d7pj8lhamng"
+path="res://.godot/imported/Rectangle 1 (1).png-31c77499b3ff4d6c599a1b9ad75ede05.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://icons/square-pause.png"
-dest_files=["res://.godot/imported/square-pause.png-5c83281bf9d7caa5294a1ffb642d8b2f.ctex"]
+source_file="res://Rectangle 1 (1).png"
+dest_files=["res://.godot/imported/Rectangle 1 (1).png-31c77499b3ff4d6c599a1b9ad75ede05.ctex"]
 
 [params]
 

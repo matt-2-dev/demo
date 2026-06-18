@@ -9,14 +9,13 @@ size = Vector2(40, 40)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_g2els"]
 size = Vector2(40, 40)
 
-[node name="Player" type="CharacterBody2D" unique_id=987319902 node_paths=PackedStringArray("player", "bullet_spawn", "pivot", "damage_cooldown") groups=["player"]]
+[node name="Player" type="CharacterBody2D" unique_id=987319902 node_paths=PackedStringArray("player", "bullet_spawn", "pivot") groups=["player"]]
 collision_mask = 2
 script = ExtResource("1_3vyb7")
 bullet_scene = ExtResource("2_g2els")
 player = NodePath(".")
 bullet_spawn = NodePath("Node2D/Marker2D")
 pivot = NodePath("Node2D")
-damage_cooldown = NodePath("DamageCooldown")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=160675688]
 position = Vector2(0, -1)
@@ -32,20 +31,21 @@ color = Color(0.7505967, 0.59441996, 0.08733872, 1)
 [node name="Node2D" type="Node2D" parent="." unique_id=1495079912]
 
 [node name="Marker2D" type="Marker2D" parent="Node2D" unique_id=793465613]
-position = Vector2(21, 0)
+position = Vector2(34, 0)
 
-[node name="PlayerAreaHitbox" type="Area2D" parent="." unique_id=744278824]
+[node name="PlayerAreaHitbox" type="Area2D" parent="." unique_id=744278824 groups=["player"]]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerAreaHitbox" unique_id=1016852946]
 position = Vector2(0, -1)
 shape = SubResource("RectangleShape2D_g2els")
 
 [node name="DamageCooldown" type="Timer" parent="." unique_id=794294063]
-wait_time = 0.5
+wait_time = 0.3
 
 [node name="ShootCooldown" type="Timer" parent="." unique_id=1416932100]
 wait_time = 0.3
 
-[connection signal="area_entered" from="PlayerAreaHitbox" to="." method="_player_damage"]
+[connection signal="area_entered" from="PlayerAreaHitbox" to="." method="_player_damage_enter"]
+[connection signal="area_exited" from="PlayerAreaHitbox" to="." method="_player_damage_exit"]
 [connection signal="timeout" from="DamageCooldown" to="." method="_damage_cooldown"]
 [connection signal="timeout" from="ShootCooldown" to="." method="_shoot_cooldown"]

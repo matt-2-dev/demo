@@ -1,0 +1,42 @@
+[gd_scene format=3 uid="uid://dlbbmsoqyym3j"]
+
+[ext_resource type="Script" uid="uid://dljkoncafh23e" path="res://scripts/lootdrop.gd" id="1_rb72k"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6me3i"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_6me3i"]
+font_size = 15
+
+[node name="LootDrop" type="Node2D" unique_id=1912924488]
+script = ExtResource("1_rb72k")
+
+[node name="LootHitbox" type="Area2D" parent="." unique_id=2009224204]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LootHitbox" unique_id=1586327516]
+shape = SubResource("RectangleShape2D_6me3i")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=487064771]
+offset_left = -10.0
+offset_top = 5.0
+offset_right = 10.0
+offset_bottom = 10.0
+color = Color(1, 0.19607843, 0.30980393, 1)
+
+[node name="loot-label-holder" type="Control" parent="." unique_id=169891839]
+layout_mode = 3
+anchors_preset = 0
+offset_left = -10.0
+offset_top = -10.0
+offset_right = 30.0
+offset_bottom = 30.0
+
+[node name="loot-text" type="Label" parent="loot-label-holder" unique_id=967749265]
+layout_mode = 0
+offset_left = -22.0
+offset_top = -9.0
+offset_right = 48.0
+offset_bottom = 13.0
+text = "5x Ammo"
+label_settings = SubResource("LabelSettings_6me3i")
+
+[connection signal="area_entered" from="LootHitbox" to="." method="_lootdrop_enter"]

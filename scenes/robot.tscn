@@ -2,16 +2,33 @@
 
 [ext_resource type="Script" uid="uid://d10ukrvhumdbg" path="res://scripts/robot.gd" id="1_br0rw"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ykvnc"]
+size = Vector2(159, 101)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gl0xr"]
 size = Vector2(79, 100.5)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_ykvnc"]
-size = Vector2(80, 101)
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_br0rw"]
+bg_color = Color(1, 0.33651495, 0.33049506, 1)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+corner_detail = 2
 
-[node name="Robot" type="CharacterBody2D" unique_id=952680712 groups=["enemy"]]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ykvnc"]
+bg_color = Color(2.7434528e-06, 0.7703601, 0.36597127, 1)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+corner_detail = 2
+
+[node name="Robot" type="CharacterBody2D" unique_id=952680712 node_paths=PackedStringArray("health_bar") groups=["enemy"]]
 collision_layer = 4
 collision_mask = 2
 script = ExtResource("1_br0rw")
+health_bar = NodePath("Control/ProgressBar")
 
 [node name="ColorRect" type="ColorRect" parent="." unique_id=2092103073]
 offset_left = -39.0
@@ -100,14 +117,35 @@ offset_top = -11.0
 offset_right = 37.0
 offset_bottom = 34.0
 
+[node name="RobotAreaHitbox" type="Area2D" parent="." unique_id=1959569375 groups=["enemy"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RobotAreaHitbox" unique_id=321091738]
+position = Vector2(0.5, 6.5)
+shape = SubResource("RectangleShape2D_ykvnc")
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1094852306]
 position = Vector2(1, 6.75)
 shape = SubResource("RectangleShape2D_gl0xr")
 
-[node name="RobotAreaHitbox" type="Area2D" parent="." unique_id=1959569375 groups=["enemy"]]
+[node name="Control" type="Control" parent="." unique_id=2096237193]
+layout_mode = 3
+anchors_preset = 0
+offset_left = -124.0
+offset_top = -103.0
+offset_right = -84.0
+offset_bottom = -63.0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="RobotAreaHitbox" unique_id=321091738]
-position = Vector2(1, 6.5)
-shape = SubResource("RectangleShape2D_ykvnc")
+[node name="ProgressBar" type="ProgressBar" parent="Control" unique_id=1493775683]
+layout_mode = 0
+offset_left = 92.0
+offset_top = 15.0
+offset_right = 156.0
+offset_bottom = 25.0
+theme_override_styles/background = SubResource("StyleBoxFlat_br0rw")
+theme_override_styles/fill = SubResource("StyleBoxFlat_ykvnc")
+max_value = 5.0
+step = 1.0
+value = 3.0
+show_percentage = false
 
 [connection signal="area_entered" from="RobotAreaHitbox" to="." method="_bullet_hit"]

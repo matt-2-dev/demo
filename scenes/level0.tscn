@@ -1,25 +1,27 @@
 [gd_scene format=3 uid="uid://d4jjkkbqn25am"]
 
 [ext_resource type="PackedScene" uid="uid://bdrm06dfgdld0" path="res://scenes/player.tscn" id="1_4exd7"]
+[ext_resource type="Script" uid="uid://bpgps5yvr18m7" path="res://scripts/gamemanager.gd" id="1_gklfi"]
 [ext_resource type="PackedScene" uid="uid://cuc18iopof07v" path="res://scenes/fake_tower.tscn" id="2_ic6my"]
-[ext_resource type="Texture2D" uid="uid://b2ocfslctgjy" path="res://icons/circle-star.png" id="3_2h6oo"]
+[ext_resource type="Texture2D" uid="uid://y0xsiqiqjkvn" path="res://icons/ui/text-holder.png" id="3_2h6oo"]
 [ext_resource type="PackedScene" uid="uid://2qdfwgtqwrnk" path="res://scenes/robot_spawner.tscn" id="3_qsrgx"]
+[ext_resource type="PackedScene" uid="uid://dlbbmsoqyym3j" path="res://scenes/lootdrop.tscn" id="5_x1x1l"]
+[ext_resource type="Script" uid="uid://ymk5cauq1an5" path="res://scripts/loot_spawner.gd" id="7_cm1v6"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_evtob"]
 size = Vector2(3079, 647)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_x1x1l"]
-bg_color = Color(0.7374468, 0.5772394, 0, 1)
-corner_radius_top_left = 3
-corner_radius_top_right = 3
-corner_radius_bottom_right = 3
-corner_radius_bottom_left = 3
-corner_detail = 3
-
 [sub_resource type="LabelSettings" id="LabelSettings_qsrgx"]
-font_size = 27
+font_size = 31
 
-[node name="Node2D" type="Node2D" unique_id=1893233345]
+[node name="Node2D" type="Node2D" unique_id=1893233345 node_paths=PackedStringArray("health_label", "points_label", "ammo_label", "shoot_label", "damage_label", "player")]
+script = ExtResource("1_gklfi")
+health_label = NodePath("DebugUI/health-text-holder/health-label")
+points_label = NodePath("DebugUI/points-text-holder/points-label")
+ammo_label = NodePath("DebugUI/ammo-text-holder/ammo-label")
+shoot_label = NodePath("DebugUI/shoot-text-holder/shoot-label")
+damage_label = NodePath("DebugUI/damage-text-holder/damage-label")
+player = NodePath("CharacterBody2D")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=1622978021]
 collision_layer = 2
@@ -28,13 +30,17 @@ collision_layer = 2
 position = Vector2(561.5, 817.5)
 shape = SubResource("RectangleShape2D_evtob")
 
-[node name="CharacterBody2D" parent="." unique_id=987319902 instance=ExtResource("1_4exd7")]
+[node name="CharacterBody2D" parent="." unique_id=987319902 node_paths=PackedStringArray("health_label", "points_label", "damage_label", "shoot_label", "ammo_label") instance=ExtResource("1_4exd7")]
 top_level = true
 position = Vector2(782, 475)
+health_label = NodePath("../DebugUI/health-text-holder/health-label")
+points_label = NodePath("../DebugUI/points-text-holder/points-label")
+damage_label = NodePath("../DebugUI/damage-text-holder/damage-label")
+shoot_label = NodePath("../DebugUI/shoot-text-holder/shoot-label")
+ammo_label = NodePath("../DebugUI/ammo-text-holder/ammo-label")
 
 [node name="Camera2D" type="Camera2D" parent="CharacterBody2D" unique_id=66485005]
-position = Vector2(4, 16)
-zoom = Vector2(0.77, 0.77)
+position = Vector2(4, 0)
 
 [node name="Node2D" parent="." unique_id=1737197597 instance=ExtResource("2_ic6my")]
 position = Vector2(401, 484)
@@ -46,7 +52,7 @@ position = Vector2(535, 484)
 position = Vector2(668, 485)
 
 [node name="Node2D4" parent="." unique_id=1204627056 instance=ExtResource("2_ic6my")]
-position = Vector2(814, 486)
+position = Vector2(813, 485)
 
 [node name="Node2D5" parent="." unique_id=345531923 instance=ExtResource("2_ic6my")]
 position = Vector2(281, 484)
@@ -58,31 +64,148 @@ offset_right = 2117.0
 offset_bottom = 1141.0
 color = Color(0.781407, 0.781407, 0.78140694, 1)
 
-[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1653886899]
+[node name="DebugUI" type="CanvasLayer" parent="." unique_id=1653886899]
+layer = 10
 
-[node name="Panel" type="Panel" parent="CanvasLayer" unique_id=171213320]
-offset_left = 42.0
-offset_top = 74.0
-offset_right = 170.0
-offset_bottom = 114.0
-theme_override_styles/panel = SubResource("StyleBoxFlat_x1x1l")
+[node name="health-text-holder" type="TextureRect" parent="DebugUI" unique_id=1334803843]
+offset_left = 454.0
+offset_top = 9.0
+offset_right = 636.0
+offset_bottom = 66.0
+texture = ExtResource("3_2h6oo")
 
-[node name="Label" type="Label" parent="CanvasLayer/Panel" unique_id=1675443080]
-layout_mode = 0
+[node name="health-label" type="Label" parent="DebugUI/health-text-holder" unique_id=2109362776]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.082417585
+anchor_top = 0.05263158
+anchor_right = 0.20879121
+anchor_bottom = 0.22910215
 offset_left = 40.0
 offset_top = 2.0
 offset_right = 121.0
 offset_bottom = 39.0
-text = "0"
+text = "Health: 5"
 label_settings = SubResource("LabelSettings_qsrgx")
+metadata/_edit_use_anchors_ = true
 
-[node name="TextureRect" type="TextureRect" parent="CanvasLayer/Panel" unique_id=683502813]
-layout_mode = 0
-offset_left = 6.0
+[node name="damage-text-holder" type="TextureRect" parent="DebugUI" unique_id=247132321]
+offset_left = 641.0
 offset_top = 9.0
-offset_right = 30.0
-offset_bottom = 33.0
+offset_right = 862.0
+offset_bottom = 66.0
 texture = ExtResource("3_2h6oo")
+
+[node name="damage-label" type="Label" parent="DebugUI/damage-text-holder" unique_id=251218720]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.1809954
+anchor_top = 0.07017544
+anchor_right = 0.4343892
+anchor_bottom = 0.24664602
+offset_left = 40.0
+offset_top = 2.0
+offset_right = 121.0
+offset_bottom = 39.0
+text = "Damage: false"
+label_settings = SubResource("LabelSettings_qsrgx")
+metadata/_edit_use_anchors_ = true
+
+[node name="points-text-holder" type="TextureRect" parent="DebugUI" unique_id=304302391]
+offset_left = 268.0
+offset_top = 9.0
+offset_right = 450.0
+offset_bottom = 66.0
+texture = ExtResource("3_2h6oo")
+
+[node name="points-label" type="Label" parent="DebugUI/points-text-holder" unique_id=202686103]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.082417585
+anchor_top = 0.05263158
+anchor_right = 0.20879121
+anchor_bottom = 0.22910215
+offset_left = 40.0
+offset_top = 2.0
+offset_right = 121.0
+offset_bottom = 39.0
+text = "Points: 0"
+label_settings = SubResource("LabelSettings_qsrgx")
+metadata/_edit_use_anchors_ = true
+
+[node name="ammo-text-holder" type="TextureRect" parent="DebugUI" unique_id=1708406961]
+offset_left = 866.0
+offset_top = 9.0
+offset_right = 1048.0
+offset_bottom = 66.0
+texture = ExtResource("3_2h6oo")
+
+[node name="ammo-label" type="Label" parent="DebugUI/ammo-text-holder" unique_id=397769425]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.10989011
+anchor_top = 0.05263158
+anchor_right = 0.26923078
+anchor_bottom = 0.22910215
+offset_left = 40.0
+offset_top = 2.0
+offset_right = 121.0
+offset_bottom = 39.0
+text = "Ammo: 10"
+label_settings = SubResource("LabelSettings_qsrgx")
+metadata/_edit_use_anchors_ = true
+
+[node name="shoot-text-holder" type="TextureRect" parent="DebugUI" unique_id=963461770]
+offset_left = 82.0
+offset_top = 9.0
+offset_right = 264.0
+offset_bottom = 66.0
+texture = ExtResource("3_2h6oo")
+
+[node name="shoot-label" type="Label" parent="DebugUI/shoot-text-holder" unique_id=1528422339]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.20879121
+anchor_top = 0.07017544
+anchor_right = 0.3021978
+anchor_bottom = 0.24664602
+offset_left = 40.0
+offset_top = 2.0
+offset_right = 121.0
+offset_bottom = 39.0
+text = "Shoot: false"
+label_settings = SubResource("LabelSettings_qsrgx")
+metadata/_edit_use_anchors_ = true
 
 [node name="Node2D6" parent="." unique_id=911483736 instance=ExtResource("3_qsrgx")]
 position = Vector2(1156, 400)
+
+[node name="Node2D7" parent="." unique_id=1912924488 instance=ExtResource("5_x1x1l")]
+z_index = 2
+z_as_relative = false
+position = Vector2(709, 482)
+
+[node name="LootSpawner" type="Node2D" parent="." unique_id=1241057595]
+script = ExtResource("7_cm1v6")
+loot_scene = ExtResource("5_x1x1l")
+
+[node name="Point1" type="Marker2D" parent="LootSpawner" unique_id=484847035]
+position = Vector2(599, 478)
+
+[node name="Point2" type="Marker2D" parent="LootSpawner" unique_id=1772807138]
+position = Vector2(396, 480)
+
+[node name="Point3" type="Marker2D" parent="LootSpawner" unique_id=1224429328]
+position = Vector2(906, 477)
+
+[node name="Point4" type="Marker2D" parent="LootSpawner" unique_id=408032733]
+position = Vector2(179, 479)
+
+[node name="Point5" type="Marker2D" parent="LootSpawner" unique_id=1232241112]
+position = Vector2(318, 482)
+
+[node name="Point6" type="Marker2D" parent="LootSpawner" unique_id=1425182804]
+position = Vector2(471, 481)
+
+[node name="Point7" type="Marker2D" parent="LootSpawner" unique_id=1201154794]
+position = Vector2(682, 473)

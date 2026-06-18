@@ -19,4 +19,4 @@ color = Color(0.9999997, 0.19717944, 0.31033188, 1)
 position = Vector2(0.5, 0)
 shape = SubResource("RectangleShape2D_h1aey")
 
-[connection signal="body_entered" from="." to="." method="_touch"]
+[connection signal="area_entered" from="." to="." method="_touch"]
