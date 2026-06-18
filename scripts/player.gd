@@ -6,8 +6,10 @@ var jump_player: float = -450.0
 var health: int = 5
 var can_shoot = true
 var can_damage = false
-var ammo = 10
-var points = 0
+
+@export var ammo = 10
+@export var points = 0
+@export var max_ammo = 0
 
 @export var bullet_scene: PackedScene
 @export var player: Node
@@ -45,6 +47,9 @@ func _process(delta: float) -> void:
 			can_shoot = false
 			shoot_label.text = "Shoot: %s" % can_shoot
 			$ShootCooldown.start($ShootCooldown.wait_time)
+	if Input.is_action_just_pressed("ui_reload"):
+		if max_ammo > 0 and ammo < 10:
+			var give = max_ammo - ammo
 
 func spawn_bullet() -> void:
 	var b = bullet_scene.instantiate()
