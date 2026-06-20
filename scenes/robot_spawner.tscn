@@ -33,12 +33,11 @@ robot = ExtResource("2_6v6yy")
 position = Vector2(48, -1)
 
 [node name="Timer" type="Timer" parent="." unique_id=808558959]
-wait_time = 2.0
 autostart = true
 
 [node name="TowerSmoke" type="CPUParticles2D" parent="." unique_id=1840575433]
 z_index = 1
-position = Vector2(181, -171)
+position = Vector2(181, -170)
 amount = 64
 lifetime = 4.46
 speed_scale = 2.27

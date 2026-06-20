@@ -1,18 +1,25 @@
 extends CharacterBody2D
 
-@export var max_speed := 150.0
+@export var max_speed := 250.0
 @export var acceleration := 800.0
 @export var gravity := 1200.0
 @export var health_bar: ProgressBar
-var health = 5
+@export var loot_scene: PackedScene
+var health = 3
 var player
 var gm
+var gameUI
 
 func _ready():
 	player = get_tree().get_first_node_in_group("player")
 	gm = get_tree().get_root().get_node("Node2D")
+	gameUI = get_tree().get_root().get_node("Node2D/GameUI")
 	add_to_group("enemy")
-	health_bar.value = 5
+	health_bar.value = 3
+func drop_ammo():
+	gm.give_ammo(floor(randi_range(3, 4)))
+func drop_points():
+	gm.give_point(floor(randi_range(5,10)))
 func _physics_process(delta):
 	if player == null:
 		return
@@ -23,10 +30,15 @@ func _physics_process(delta):
 	move_and_slide()
 func _bullet_hit(area: Area2D) -> void:
 	if area.is_in_group("bullet"):
-		print("robot touched BULLET at ", Time.get_ticks_msec(), "ms")
 		area.queue_free()
 		health -= 1
 		health_bar.value = health
-	if health <= 0:
-		gm.give_point()
-		queue_free()
+		if health <= 0:
+			drop_ammo()
+			queue_free()
+		if randf() < 0.12:
+			drop_points()
+			gm.give_point(floor(randi_range(5,10)))
+			gameUI.get_node("kills-label").text = str(
+				int(gameUI.get_node("kills-label").text) + 1
+			)

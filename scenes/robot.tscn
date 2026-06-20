@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://rh72uciyx4b8"]
 
 [ext_resource type="Script" uid="uid://d10ukrvhumdbg" path="res://scripts/robot.gd" id="1_br0rw"]
+[ext_resource type="PackedScene" uid="uid://dlbbmsoqyym3j" path="res://scenes/lootdrop.tscn" id="2_ykvnc"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ykvnc"]
 size = Vector2(159, 101)
@@ -29,6 +30,7 @@ collision_layer = 4
 collision_mask = 2
 script = ExtResource("1_br0rw")
 health_bar = NodePath("Control/ProgressBar")
+loot_scene = ExtResource("2_ykvnc")
 
 [node name="ColorRect" type="ColorRect" parent="." unique_id=2092103073]
 offset_left = -39.0
@@ -143,9 +145,9 @@ offset_right = 156.0
 offset_bottom = 25.0
 theme_override_styles/background = SubResource("StyleBoxFlat_br0rw")
 theme_override_styles/fill = SubResource("StyleBoxFlat_ykvnc")
-max_value = 5.0
+max_value = 3.0
 step = 1.0
-value = 3.0
+value = 2.0
 show_percentage = false
 
 [connection signal="area_entered" from="RobotAreaHitbox" to="." method="_bullet_hit"]

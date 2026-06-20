@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b2ocfslctgjy"
-path="res://.godot/imported/circle-star.png-0732e01bc4bfa27fdc5205d88f8bdae1.ctex"
+uid="uid://bgeqy3gx1mmk7"
+path="res://.godot/imported/health-icon.png-c3d12ecc7e078516a86eb0b024a0ef39.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://icons/ui/circle-star.png"
-dest_files=["res://.godot/imported/circle-star.png-0732e01bc4bfa27fdc5205d88f8bdae1.ctex"]
+source_file="res://icons/ui/health-icon.png"
+dest_files=["res://.godot/imported/health-icon.png-c3d12ecc7e078516a86eb0b024a0ef39.ctex"]
 
 [params]
 

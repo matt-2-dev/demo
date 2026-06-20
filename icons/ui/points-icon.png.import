@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c5d7pj8lhamng"
-path="res://.godot/imported/Rectangle 1 (1).png-31c77499b3ff4d6c599a1b9ad75ede05.ctex"
+uid="uid://bo7jjlb6li478"
+path="res://.godot/imported/points-icon.png-275778c1b408cd0e4cc656e299e5dbb3.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Rectangle 1 (1).png"
-dest_files=["res://.godot/imported/Rectangle 1 (1).png-31c77499b3ff4d6c599a1b9ad75ede05.ctex"]
+source_file="res://icons/ui/points-icon.png"
+dest_files=["res://.godot/imported/points-icon.png-275778c1b408cd0e4cc656e299e5dbb3.ctex"]
 
 [params]
 

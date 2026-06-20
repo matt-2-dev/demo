@@ -40,10 +40,10 @@ position = Vector2(0, -1)
 shape = SubResource("RectangleShape2D_g2els")
 
 [node name="DamageCooldown" type="Timer" parent="." unique_id=794294063]
-wait_time = 0.3
+wait_time = 0.6
 
 [node name="ShootCooldown" type="Timer" parent="." unique_id=1416932100]
-wait_time = 0.3
+wait_time = 0.26
 
 [connection signal="area_entered" from="PlayerAreaHitbox" to="." method="_player_damage_enter"]
 [connection signal="area_exited" from="PlayerAreaHitbox" to="." method="_player_damage_exit"]

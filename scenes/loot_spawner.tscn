@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://45soji6slp6s"]
+
+[ext_resource type="Script" uid="uid://ymk5cauq1an5" path="res://scripts/loot_spawner.gd" id="1_6cke6"]
+[ext_resource type="PackedScene" uid="uid://dlbbmsoqyym3j" path="res://scenes/lootdrop.tscn" id="2_gc0ja"]
+
+[node name="LootSpawner" type="Node2D" unique_id=1650497377 node_paths=PackedStringArray("spawn_points", "loot_spawn_timer")]
+script = ExtResource("1_6cke6")
+loot_scene = ExtResource("2_gc0ja")
+spawn_points = [null, null, null, null, null, null, null]
+loot_spawn_timer = NodePath("LootSpawnTimer")
+
+[node name="LootSpawnTimer" type="Timer" parent="." unique_id=311367917]
+wait_time = 0.5
+
+[connection signal="timeout" from="LootSpawnTimer" to="." method="_loot_spawn_timer"]

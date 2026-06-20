@@ -1,59 +1,70 @@
 extends Node2D
 # Export Variables for UI
-@export var health_label: Label
-var points_label
-var ammo_label
-var shoot_label: Label
-var damage_label: Label
-var max_ammo_label
-# Export Variables for Game
+# GAME UI
+@export var health_bar: ProgressBar
+@export var points_label: Label
+@export var mag_label: Label
+@export var reserve_ammo_label: Label
+# DEBUG UI
+@export var debug_shoot_label: Label
+@export var debug_damage_label: Label
+# Export Variables for DEBUG
 @export var damage: bool
 @export var shoot: bool
 # Export Variables for CharacterBody2D
 @export var player: CharacterBody2D
 # Functions
-func _ready() -> void:
-	points_label = $"DebugUI/points-text-holder/points-label"
-	ammo_label = $"DebugUI/ammo-text-holder/ammo-label"
-	max_ammo_label = $"DebugUI/max_ammo-text-holder/max_ammo-label"
 # // Points
-func give_point() -> void:
-	player.points += 1
-	points_label.text = "Points: %s" % player.points
+func give_point(amount) -> void:
+	player.points += amount
+	points_label.text = str(player.points)
 # // Damage
 func enable_damage():
 	damage = true
-	damage_label.text = "Damage: %s" % damage
+	debug_damage_label.text = "Damage: %s" % damage
 func disable_damage():
 	damage = false
-	damage_label.text = "Damage: %s" % damage
+	debug_damage_label.text = "Damage: %s" % damage
 # // Ammo
+func calc_fill(amount, mag, reserve, mag_limit := 10, reserve_limit := 20):
+	var mag_space = mag_limit - mag
+	var reserve_space = reserve_limit - reserve
+	var give_mag = min(amount, mag_space)
+	amount -= give_mag
+	var give_reserve = min(amount, reserve_space)
+	return {
+		"mag": give_mag,
+		"reserve": give_reserve
+	}
+func transfer(amount, current, limit):
+	var space = limit - current
+	return min(amount, space)
+
 func give_ammo(amount):
 	var mag_limit = 10
 	var reserve_limit = 20
-	var total_limit = mag_limit + reserve_limit
-
-	var mag_space = mag_limit - player.ammo
-	var reserve_space = reserve_limit - player.max_ammo
-	var total_space = total_limit - (player.ammo + player.max_ammo)
-
-	print("mag space:", mag_space, "reserve space:", reserve_space, "total space:", total_space)
-	if total_space <= 0:
-		print("No space left")
-		return
-	if reserve_space > 0 and amount > 0:
-		var give_to_reserve = min(amount, reserve_space)
-		player.max_ammo += give_to_reserve
-		amount -= give_to_reserve
-		print("gave reserve:", give_to_reserve)
-	mag_space = mag_limit - player.ammo
-	if mag_space > 0 and amount > 0:
-		var give_to_mag = min(amount, mag_space)
-		player.ammo += give_to_mag
-		amount -= give_to_mag
-		print("gave mag:", give_to_mag)
-	ammo_label.text = "Ammo: %s" % player.ammo
-	max_ammo_label.text = "Max Ammo: %s" % player.max_ammo
+	var give_mag = transfer(amount, player.ammo, mag_limit)
+	player.ammo += give_mag
+	amount -= give_mag
+	var give_reserve = transfer(amount, player.reserve_ammo, reserve_limit)
+	player.reserve_ammo += give_reserve
+	mag_label.text = str(player.ammo)
+	reserve_ammo_label.text = str(player.reserve_ammo)
+func calculate_ammo_to_give(amount, mag, reserve):
+	var mag_space = 10 - mag
+	var reserve_space = 20 - reserve
+	var give_mag = min(amount, mag_space)
+	amount -= give_mag
+	var give_reserve = min(amount, reserve_space)
+	amount -= give_reserve
+	return {
+		"give_mag": give_mag,
+		"give_reserve": give_reserve
+	}
+func calculate_reload(mag, reserve):
+	var mag_space = 10 - mag
+	var give_mag = min(mag_space, reserve)
+	return give_mag
 # // Loot
 func get_loot(label: Label):
 	if label.text.contains("x"):
