@@ -19,7 +19,6 @@ func _lootdrop_enter(area: Area2D) -> void:
 	if area.is_in_group("player"):
 		var loot_text = $"loot-label-holder/loot-text"
 		var loot = gm.get_loot(loot_text)
-		# DIFFERENT LOOT
 		if loot.item == "Health":
 			if player.health < 5:
 				var give = clamp(player.health + loot.amount, 0, 5)
