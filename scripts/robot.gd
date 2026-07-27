@@ -38,7 +38,7 @@ func _bullet_hit(area: Area2D) -> void:
 			queue_free()
 		if randf() < 0.12:
 			drop_points()
-			gm.give_point(floor(randi_range(5,10)))
+			gm.give_point(5)
 			gameUI.get_node("kills-label").text = str(
 				int(gameUI.get_node("kills-label").text) + 1
 			)
