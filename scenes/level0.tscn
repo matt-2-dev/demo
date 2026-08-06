@@ -14,6 +14,7 @@
 [ext_resource type="Texture2D" uid="uid://bo7jjlb6li478" path="res://icons/ui/points-icon.png" id="12_ooohs"]
 [ext_resource type="Texture2D" uid="uid://derusnnqkxsuy" path="res://icons/ui/ammo-icon.png" id="13_pnrra"]
 [ext_resource type="Texture2D" uid="uid://yguy5bgwd44m" path="res://icons/ui/reserve-ammo-icon.png" id="14_yoi1k"]
+[ext_resource type="Texture2D" uid="uid://bf8qboepdyn8v" path="res://icons/ui/upgrade_holder.png" id="15_pnrra"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_evtob"]
 size = Vector2(3079, 647)
@@ -47,6 +48,19 @@ font_size = 27
 [sub_resource type="LabelSettings" id="LabelSettings_3i82n"]
 font = ExtResource("5_tcqsn")
 font_size = 27
+
+[sub_resource type="LabelSettings" id="LabelSettings_pnrra"]
+font = ExtResource("5_tcqsn")
+font_size = 41
+
+[sub_resource type="LabelSettings" id="LabelSettings_yoi1k"]
+font = ExtResource("5_tcqsn")
+font_size = 27
+
+[sub_resource type="LabelSettings" id="LabelSettings_3mf5k"]
+font = ExtResource("5_tcqsn")
+font_size = 18
+font_color = Color(0.3254902, 1, 0.4745098, 1)
 
 [node name="Node2D" type="Node2D" unique_id=1893233345 node_paths=PackedStringArray("health_bar", "points_label", "mag_label", "reserve_ammo_label", "debug_shoot_label", "debug_damage_label", "player")]
 script = ExtResource("1_gklfi")
@@ -247,3 +261,44 @@ offset_right = 926.0
 offset_bottom = 56.0
 text = "10"
 label_settings = SubResource("LabelSettings_3i82n")
+
+[node name="UpgradeUI" type="CanvasLayer" parent="." unique_id=1804754877]
+
+[node name="frame-holder" type="TextureRect" parent="UpgradeUI" unique_id=1492905774]
+offset_left = 299.0
+offset_top = 124.0
+offset_right = 854.0
+offset_bottom = 512.0
+texture = ExtResource("15_pnrra")
+
+[node name="Label" type="Label" parent="UpgradeUI" unique_id=1313684244]
+offset_left = 504.0
+offset_top = 133.0
+offset_right = 669.0
+offset_bottom = 183.0
+text = "Upgrade"
+label_settings = SubResource("LabelSettings_pnrra")
+
+[node name="TextureRect" type="TextureRect" parent="UpgradeUI" unique_id=817957522]
+offset_left = 394.0
+offset_top = 240.0
+offset_right = 481.0
+offset_bottom = 327.0
+texture = ExtResource("11_6hrqr")
+
+[node name="Label2" type="Label" parent="UpgradeUI" unique_id=1033443248]
+offset_left = 330.0
+offset_top = 329.0
+offset_right = 539.0
+offset_bottom = 368.0
+text = "Shoot Cooldown"
+label_settings = SubResource("LabelSettings_yoi1k")
+
+[node name="Label3" type="Label" parent="UpgradeUI" unique_id=920646906]
+offset_left = 370.0
+offset_top = 361.0
+offset_right = 493.0
+offset_bottom = 384.0
+theme_override_colors/font_color = Color(1, 0.20784314, 1, 1)
+text = "0.26 -> 0.20"
+label_settings = SubResource("LabelSettings_3mf5k")
