@@ -21,7 +21,11 @@ var can_damage = true
 @export var points = 0
 @export var reserve_ammo = 10
 @export var health = 5
-
+# Upgrade UI
+@export var upgrade_ui: CanvasLayer
+@export var shoot_cooldown_button: Button
+@export var shoot_cooldown_label: Label
+# other
 @export var bullet_scene: PackedScene
 @export var player: Node
 @export var bullet_spawn: Marker2D
@@ -55,6 +59,9 @@ func _process(delta: float) -> void:
 		if player.reserve_ammo > 0 and player.ammo < 10:
 			print("reloading")
 			reload()
+	# UPGRADE UI
+	if Input.is_action_just_pressed("ui_upgrade"):
+		upgrade_ui.visible = !upgrade_ui.visible
 func reload():
 	var mag_limit = 10
 	var needed = mag_limit - ammo

@@ -15,6 +15,7 @@
 [ext_resource type="Texture2D" uid="uid://derusnnqkxsuy" path="res://icons/ui/ammo-icon.png" id="13_pnrra"]
 [ext_resource type="Texture2D" uid="uid://yguy5bgwd44m" path="res://icons/ui/reserve-ammo-icon.png" id="14_yoi1k"]
 [ext_resource type="Texture2D" uid="uid://bf8qboepdyn8v" path="res://icons/ui/upgrade_holder.png" id="15_pnrra"]
+[ext_resource type="Script" uid="uid://ddag7ggl3krly" path="res://scripts/upgrade.gd" id="15_yoi1k"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_evtob"]
 size = Vector2(3079, 647)
@@ -62,6 +63,17 @@ font = ExtResource("5_tcqsn")
 font_size = 18
 font_color = Color(0.3254902, 1, 0.4745098, 1)
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5xwn4"]
+bg_color = Color(0.9019608, 0.1254902, 0.13725491, 1)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+corner_detail = 2
+
+[sub_resource type="LabelSettings" id="LabelSettings_r2ue6"]
+font_size = 20
+
 [node name="Node2D" type="Node2D" unique_id=1893233345 node_paths=PackedStringArray("health_bar", "points_label", "mag_label", "reserve_ammo_label", "debug_shoot_label", "debug_damage_label", "player")]
 script = ExtResource("1_gklfi")
 health_bar = NodePath("GameUI/health-bar")
@@ -79,7 +91,7 @@ collision_layer = 2
 position = Vector2(561.5, 817.5)
 shape = SubResource("RectangleShape2D_evtob")
 
-[node name="CharacterBody2D" parent="." unique_id=987319902 node_paths=PackedStringArray("health_bar", "kill_label", "points_label", "mag_label", "reserve_ammo_label", "damage_debug_label", "shoot_debug_label") instance=ExtResource("1_4exd7")]
+[node name="CharacterBody2D" parent="." unique_id=987319902 node_paths=PackedStringArray("health_bar", "kill_label", "points_label", "mag_label", "reserve_ammo_label", "damage_debug_label", "shoot_debug_label", "upgrade_ui", "shoot_cooldown_button", "shoot_cooldown_label") instance=ExtResource("1_4exd7")]
 top_level = true
 position = Vector2(729, 472)
 health_bar = NodePath("../GameUI/health-bar")
@@ -89,6 +101,9 @@ mag_label = NodePath("../GameUI/mag-label")
 reserve_ammo_label = NodePath("../GameUI/reserve-ammo-label")
 damage_debug_label = NodePath("../DebugUI/damage-label-holder/damage-label")
 shoot_debug_label = NodePath("../DebugUI/shoot-label-holder/shoot-label")
+upgrade_ui = NodePath("../UpgradeUI")
+shoot_cooldown_button = NodePath("../UpgradeUI/upgrade-button")
+shoot_cooldown_label = NodePath("../UpgradeUI/shoot-cooldown-text2")
 
 [node name="Camera2D" type="Camera2D" parent="CharacterBody2D" unique_id=66485005]
 position = Vector2(4, 0)
@@ -262,7 +277,10 @@ offset_bottom = 56.0
 text = "10"
 label_settings = SubResource("LabelSettings_3i82n")
 
-[node name="UpgradeUI" type="CanvasLayer" parent="." unique_id=1804754877]
+[node name="UpgradeUI" type="CanvasLayer" parent="." unique_id=1804754877 node_paths=PackedStringArray("shoot_cooldown_button", "shoot_cooldown_stat")]
+script = ExtResource("15_yoi1k")
+shoot_cooldown_button = NodePath("upgrade-button")
+shoot_cooldown_stat = NodePath("shoot-cooldown-text2")
 
 [node name="frame-holder" type="TextureRect" parent="UpgradeUI" unique_id=1492905774]
 offset_left = 299.0
@@ -271,7 +289,7 @@ offset_right = 854.0
 offset_bottom = 512.0
 texture = ExtResource("15_pnrra")
 
-[node name="Label" type="Label" parent="UpgradeUI" unique_id=1313684244]
+[node name="upgrade-text-holder" type="Label" parent="UpgradeUI" unique_id=1313684244]
 offset_left = 504.0
 offset_top = 133.0
 offset_right = 669.0
@@ -279,14 +297,14 @@ offset_bottom = 183.0
 text = "Upgrade"
 label_settings = SubResource("LabelSettings_pnrra")
 
-[node name="TextureRect" type="TextureRect" parent="UpgradeUI" unique_id=817957522]
+[node name="shoot-cooldown-image" type="TextureRect" parent="UpgradeUI" unique_id=817957522]
 offset_left = 394.0
 offset_top = 240.0
 offset_right = 481.0
 offset_bottom = 327.0
 texture = ExtResource("11_6hrqr")
 
-[node name="Label2" type="Label" parent="UpgradeUI" unique_id=1033443248]
+[node name="shoot-cooldown-text" type="Label" parent="UpgradeUI" unique_id=1033443248]
 offset_left = 330.0
 offset_top = 329.0
 offset_right = 539.0
@@ -294,7 +312,7 @@ offset_bottom = 368.0
 text = "Shoot Cooldown"
 label_settings = SubResource("LabelSettings_yoi1k")
 
-[node name="Label3" type="Label" parent="UpgradeUI" unique_id=920646906]
+[node name="upgrade-text" type="Label" parent="UpgradeUI" unique_id=920646906]
 offset_left = 370.0
 offset_top = 361.0
 offset_right = 493.0
@@ -302,3 +320,20 @@ offset_bottom = 384.0
 theme_override_colors/font_color = Color(1, 0.20784314, 1, 1)
 text = "0.26 -> 0.20"
 label_settings = SubResource("LabelSettings_3mf5k")
+
+[node name="upgrade-button" type="Button" parent="UpgradeUI" unique_id=954542806]
+offset_left = 329.0
+offset_top = 390.0
+offset_right = 521.0
+offset_bottom = 429.0
+theme_override_styles/normal = SubResource("StyleBoxFlat_5xwn4")
+
+[node name="shoot-cooldown-text2" type="Label" parent="UpgradeUI" unique_id=1629261241]
+offset_left = 335.0
+offset_top = 395.0
+offset_right = 516.0
+offset_bottom = 423.0
+text = "Upgrade (5 points)"
+label_settings = SubResource("LabelSettings_r2ue6")
+
+[connection signal="pressed" from="UpgradeUI/upgrade-button" to="UpgradeUI" method="_upgrade_shoot_cooldown"]
