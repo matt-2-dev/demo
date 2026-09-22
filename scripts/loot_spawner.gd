@@ -10,7 +10,7 @@ var max_loot = 7
 @export var current_loot = 0
 
 func _ready():
-	main_scene = get_tree().get_root().get_node("Node2D")
+	main_scene = get_tree().current_scene
 	spawn_points = [
 		main_scene.get_node("LootPoints").get_node("Point1"),
 		main_scene.get_node("LootPoints").get_node("Point2"),

@@ -25,12 +25,13 @@ var upgrade_ui: CanvasLayer = GameManager.upgrade_ui
 var shoot_cooldown_button: Button = GameManager.shoot_cooldown_button
 var shoot_cooldown_label: Label = GameManager.shoot_cooldown_label
 # other
-var bullet_scene: PackedScene
-var player: Node
-var bullet_spawn: Marker2D
+@export var bullet_scene: PackedScene
+@export var player: Node
+@export var bullet_spawn: Marker2D
 var pivot: Node2D
 
 func _ready():
+	bullet_scene = load("res://scenes/bullet.tscn")
 	gm = GameManager
 	add_to_group("player")
 func _process(delta: float) -> void:

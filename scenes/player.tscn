@@ -9,13 +9,12 @@ size = Vector2(40, 40)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_g2els"]
 size = Vector2(40, 40)
 
-[node name="Player" type="CharacterBody2D" unique_id=987319902 node_paths=PackedStringArray("player", "bullet_spawn", "pivot") groups=["player"]]
+[node name="Player" type="CharacterBody2D" unique_id=987319902 node_paths=PackedStringArray("player", "bullet_spawn") groups=["player"]]
 collision_mask = 2
 script = ExtResource("1_3vyb7")
 bullet_scene = ExtResource("2_g2els")
 player = NodePath(".")
 bullet_spawn = NodePath("Node2D/Marker2D")
-pivot = NodePath("Node2D")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=160675688]
 position = Vector2(0, -1)
@@ -43,7 +42,7 @@ shape = SubResource("RectangleShape2D_g2els")
 wait_time = 0.6
 
 [node name="ShootCooldown" type="Timer" parent="." unique_id=1416932100]
-wait_time = 0.26
+wait_time = 0.25
 
 [connection signal="area_entered" from="PlayerAreaHitbox" to="." method="_player_damage_enter"]
 [connection signal="area_exited" from="PlayerAreaHitbox" to="." method="_player_damage_exit"]

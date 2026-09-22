@@ -19,6 +19,9 @@ extends Node2D
 # Export Variables for CharacterBody2D
 @export var player: CharacterBody2D
 # Functions
+func _process(delta: float) -> void:
+	# this will be used for the winning scene with a timer being added at the top hopefully godot doesnt annoy me with it
+	pass
 func _ready():
 	#export variables
 	GameManager.health_bar = $"GameUI/health-bar"
@@ -33,7 +36,6 @@ func _ready():
 	GameManager.player = $CharacterBody2D
 # // Points
 func give_point(amount) -> void:
-	
 	#normal
 	player.points += amount
 	points_label.text = str(player.points)
