@@ -1,0 +1,144 @@
+[gd_scene format=3 uid="uid://cuc18iopof07v"]
+
+[ext_resource type="Script" uid="uid://r1vwt40lrf63" path="res://scripts/tower.gd" id="1_2x682"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_poth0"]
+font_size = 6
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7j8ug"]
+size = Vector2(100, 56)
+
+[node name="Node2D" type="Node2D" unique_id=1737197597]
+script = ExtResource("1_2x682")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1901790375]
+offset_left = -52.0
+offset_top = -59.0
+offset_right = 48.0
+color = Color(0.3403393, 0.34033933, 0.3403393, 1)
+
+[node name="ColorRect14" type="ColorRect" parent="." unique_id=717197604]
+offset_left = -61.0
+offset_top = -64.0
+offset_right = 55.0
+offset_bottom = -55.0
+color = Color(0.49747366, 0.49747366, 0.49747366, 1)
+
+[node name="ColorRect15" type="ColorRect" parent="." unique_id=1104871848]
+offset_left = -52.0
+offset_top = -85.0
+offset_right = -35.0
+offset_bottom = -64.0
+color = Color(0.39308554, 0.39308554, 0.39308533, 1)
+
+[node name="ColorRect16" type="ColorRect" parent="." unique_id=584254020]
+offset_left = -57.0
+offset_top = -86.0
+offset_right = -30.0
+offset_bottom = -81.0
+color = Color(0.20511743, 0.20511743, 0.20511743, 1)
+
+[node name="ColorRect17" type="ColorRect" parent="." unique_id=2139538124]
+offset_left = 32.0
+offset_top = -85.0
+offset_right = 49.0
+offset_bottom = -64.0
+color = Color(0.39308554, 0.39308554, 0.39308533, 1)
+
+[node name="ColorRect20" type="ColorRect" parent="." unique_id=1385278823]
+offset_left = -2.0
+offset_top = -106.0
+offset_right = 1.0
+offset_bottom = -69.0
+color = Color(0.19434929, 0.19434926, 0.19434929, 1)
+
+[node name="ColorRect21" type="ColorRect" parent="." unique_id=1085139073]
+offset_left = 1.0
+offset_top = -106.0
+offset_right = 20.0
+offset_bottom = -95.0
+color = Color(0.19434929, 0.19434926, 0.19434929, 1)
+
+[node name="ColorRect19" type="ColorRect" parent="." unique_id=942468306]
+offset_left = -35.0
+offset_top = -69.0
+offset_right = 32.0
+offset_bottom = -64.0
+color = Color(0.39308554, 0.39308554, 0.39308533, 1)
+
+[node name="ColorRect18" type="ColorRect" parent="." unique_id=971366351]
+offset_left = 27.0
+offset_top = -86.0
+offset_right = 54.0
+offset_bottom = -81.0
+color = Color(0.20511743, 0.20511743, 0.20511743, 1)
+
+[node name="ColorRect4" type="ColorRect" parent="." unique_id=1877574820]
+offset_left = -24.0
+offset_top = -55.0
+offset_right = -19.0
+color = Color(0.26293245, 0.26293245, 0.26293242, 1)
+
+[node name="ColorRect6" type="ColorRect" parent="." unique_id=9541985]
+offset_left = -46.0
+offset_top = -55.0
+offset_right = -41.0
+color = Color(0.26293245, 0.26293245, 0.26293242, 1)
+
+[node name="ColorRect7" type="ColorRect" parent="." unique_id=306148394]
+offset_left = -35.0
+offset_top = -55.0
+offset_right = -30.0
+color = Color(0.26293245, 0.26293245, 0.26293242, 1)
+
+[node name="ColorRect8" type="ColorRect" parent="." unique_id=1881600274]
+offset_left = -13.0
+offset_top = -55.0
+offset_right = -8.0
+color = Color(0.26293245, 0.26293245, 0.26293242, 1)
+
+[node name="ColorRect5" type="ColorRect" parent="." unique_id=931222986]
+offset_left = 19.0
+offset_top = -55.0
+offset_right = 24.0
+color = Color(0.26293245, 0.26293245, 0.26293242, 1)
+
+[node name="ColorRect10" type="ColorRect" parent="." unique_id=1824155033]
+offset_left = -3.0
+offset_top = -55.0
+offset_right = 2.0
+color = Color(0.26293245, 0.26293245, 0.26293242, 1)
+
+[node name="ColorRect11" type="ColorRect" parent="." unique_id=189988048]
+offset_left = 8.0
+offset_top = -55.0
+offset_right = 13.0
+color = Color(0.26293245, 0.26293245, 0.26293242, 1)
+
+[node name="ColorRect12" type="ColorRect" parent="." unique_id=1970263444]
+offset_left = 30.0
+offset_top = -55.0
+offset_right = 35.0
+color = Color(0.26293245, 0.26293245, 0.26293242, 1)
+
+[node name="ColorRect13" type="ColorRect" parent="." unique_id=841460322]
+offset_left = 39.0
+offset_top = -55.0
+offset_right = 44.0
+color = Color(0.26293245, 0.26293245, 0.26293242, 1)
+
+[node name="Label" type="Label" parent="." unique_id=290908900]
+offset_left = 1.0
+offset_top = -106.0
+offset_right = 18.0
+offset_bottom = -97.0
+text = "tower"
+label_settings = SubResource("LabelSettings_poth0")
+
+[node name="Area2D" type="Area2D" parent="." unique_id=197121845]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1597560416]
+position = Vector2(-2, -27)
+shape = SubResource("RectangleShape2D_7j8ug")
+
+[connection signal="area_entered" from="Area2D" to="." method="_touch"]

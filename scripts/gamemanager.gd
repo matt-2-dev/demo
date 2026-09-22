@@ -2,20 +2,39 @@ extends Node2D
 # Export Variables for UI
 # GAME UI
 @export var health_bar: ProgressBar
+@export var kill_label: Label
 @export var points_label: Label
-@export var mag_label: Label
+@export var mag_label: Label 
 @export var reserve_ammo_label: Label
 # DEBUG UI
 @export var debug_shoot_label: Label
 @export var debug_damage_label: Label
+# UPGRADE
+@export var upgrade_ui: CanvasLayer
+@export var shoot_cooldown_button: Button
+@export var shoot_cooldown_label: Label
 # Export Variables for DEBUG
 @export var damage: bool
 @export var shoot: bool
 # Export Variables for CharacterBody2D
 @export var player: CharacterBody2D
 # Functions
+func _ready():
+	#export variables
+	GameManager.health_bar = $"GameUI/health-bar"
+	GameManager.points_label = $"GameUI/points-label"
+	GameManager.mag_label = $"GameUI/mag-label"
+	GameManager.reserve_ammo_label = $"GameUI/reserve-ammo-label"
+	GameManager.debug_damage_label = $"DebugUI/damage-label-holder/damage-label"
+	GameManager.debug_shoot_label = $"DebugUI/shoot-label-holder/shoot-label"
+	GameManager.upgrade_ui = $UpgradeUI
+	GameManager.shoot_cooldown_button = $"UpgradeUI/upgrade-shoot-cooldown-button"
+	GameManager.shoot_cooldown_label = $"UpgradeUI/shoot-cooldown-stat"
+	GameManager.player = $CharacterBody2D
 # // Points
 func give_point(amount) -> void:
+	
+	#normal
 	player.points += amount
 	points_label.text = str(player.points)
 # // Damage

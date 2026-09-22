@@ -7,19 +7,18 @@ extends CharacterBody2D
 @export var loot_scene: PackedScene
 var health = 3
 var player
-var gm
+var gm 
 var gameUI
 
 func _ready():
 	player = get_tree().get_first_node_in_group("player")
-	gm = get_tree().get_root().get_node("Node2D")
+	gm = GameManager
 	gameUI = get_tree().get_root().get_node("Node2D/GameUI")
 	add_to_group("enemy")
 	health_bar.value = 3
 func drop_ammo():
 	gm.give_ammo(floor(randi_range(3, 4)))
 func drop_points():
-	# gm will be repladed by upgrade system soon
 	gm.give_point(1)
 func _physics_process(delta):
 	if player == null:
@@ -35,9 +34,6 @@ func _bullet_hit(area: Area2D) -> void:
 		health -= 1
 		health_bar.value = health
 		if health <= 0:
-			# this will be replaced by the actual point upgrade system
-			# which uses the actual increase to calculate points from game manager
-			# but rn just this
 			drop_ammo()
 			queue_free()
 			drop_points()
