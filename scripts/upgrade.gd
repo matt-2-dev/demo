@@ -1,6 +1,8 @@
 extends CanvasLayer
 
-@export var shoot_cooldown_button: Button
+@export var shoot_cooldown_upgrade: Button
+@export var point_per_kill_upgrade: Button
+@export var point_per_kill_stat: Label
 @export var shoot_cooldown_stat: Label
 var player 
 # player stats
@@ -15,8 +17,18 @@ func _ready():
 	reserve_ammo = player.reserve_ammo
 	points = player.points
 	health = player.health
-	
-	
+	# keybind close
+	if Input.is_action_just_pressed("ui_exit"):
+		print("pressed exit")
+		visible = false
+	# keybind open
+	if Input.is_action_just_pressed("ui_upgrade"):
+		print("pressed open")
+		visible = true
 # upgrade shoot cooldown button
 func _upgrade_shoot_cooldown() -> void:
-	pass # upgrade logic here beta
+	print("button for upgrade shoot cooldown is pressed :0")
+func _upgrade_point_per_kill() -> void:
+	print("you press")
+func _exit() -> void:
+	visible = false

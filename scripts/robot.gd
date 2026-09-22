@@ -19,7 +19,8 @@ func _ready():
 func drop_ammo():
 	gm.give_ammo(floor(randi_range(3, 4)))
 func drop_points():
-	gm.give_point(floor(randi_range(5,10)))
+	# gm will be repladed by upgrade system soon
+	gm.give_point(1)
 func _physics_process(delta):
 	if player == null:
 		return
@@ -34,11 +35,12 @@ func _bullet_hit(area: Area2D) -> void:
 		health -= 1
 		health_bar.value = health
 		if health <= 0:
+			# this will be replaced by the actual point upgrade system
+			# which uses the actual increase to calculate points from game manager
+			# but rn just this
 			drop_ammo()
 			queue_free()
-		if randf() < 0.12:
 			drop_points()
-			gm.give_point(5)
 			gameUI.get_node("kills-label").text = str(
 				int(gameUI.get_node("kills-label").text) + 1
 			)
