@@ -15,20 +15,12 @@
 [ext_resource type="Texture2D" uid="uid://derusnnqkxsuy" path="res://icons/ui/ammo-icon.png" id="13_pnrra"]
 [ext_resource type="Texture2D" uid="uid://yguy5bgwd44m" path="res://icons/ui/reserve-ammo-icon.png" id="14_yoi1k"]
 [ext_resource type="Texture2D" uid="uid://bf8qboepdyn8v" path="res://icons/ui/upgrade_holder.png" id="15_pnrra"]
-[ext_resource type="Script" uid="uid://ddag7ggl3krly" path="res://scripts/upgrade.gd" id="15_yoi1k"]
+[ext_resource type="Script" uid="uid://ddag7ggl3krly" path="res://scripts/upgrade_manager.gd" id="15_yoi1k"]
 [ext_resource type="Texture2D" uid="uid://cb6w4q3tbeh" path="res://icons/ui/star-plus.png" id="17_5xwn4"]
-[ext_resource type="Script" uid="uid://56padt77tmj5" path="res://scripts/upgrade_manager.gd" id="18_3i82n"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_evtob"]
-size = Vector2(5288, 2279)
 
 [sub_resource type="LabelSettings" id="LabelSettings_6q6d4"]
 font = ExtResource("5_tcqsn")
 font_size = 30
-
-[sub_resource type="LabelSettings" id="LabelSettings_l3elg"]
-font = ExtResource("5_tcqsn")
-font_size = 41
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wetln"]
 bg_color = Color(0.74509805, 0.1882353, 0.19607843, 1)
@@ -52,6 +44,10 @@ font_size = 27
 font = ExtResource("5_tcqsn")
 font_size = 27
 
+[sub_resource type="LabelSettings" id="LabelSettings_l3elg"]
+font = ExtResource("5_tcqsn")
+font_size = 41
+
 [sub_resource type="LabelSettings" id="LabelSettings_pnrra"]
 font = ExtResource("5_tcqsn")
 font_size = 41
@@ -73,8 +69,20 @@ corner_radius_bottom_right = 2
 corner_radius_bottom_left = 2
 corner_detail = 2
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_l1g8i"]
+bg_color = Color(0.47843137, 0.03529412, 0.047058824, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8qpon"]
+bg_color = Color(0.6784314, 0.07058824, 0.08627451, 1)
+
 [sub_resource type="LabelSettings" id="LabelSettings_r2ue6"]
 font_size = 20
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3mf5k"]
+bg_color = Color(0.4776305, 0.03555615, 0.047213025, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_r2ue6"]
+bg_color = Color(0.6784314, 0.07058824, 0.08627451, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3i82n"]
 bg_color = Color(0.9019608, 0.1254902, 0.13725491, 1)
@@ -84,7 +92,13 @@ font = ExtResource("5_tcqsn")
 font_size = 22
 shadow_size = 0
 
-[node name="Node2D" type="Node2D" unique_id=1893233345 node_paths=PackedStringArray("health_bar", "kill_label", "points_label", "mag_label", "reserve_ammo_label", "debug_shoot_label", "debug_damage_label", "upgrade_ui", "shoot_cooldown_button", "shoot_cooldown_label", "player")]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5xwn4"]
+size = Vector2(7642.25, 2578)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3i82n"]
+size = Vector2(7633, 2586)
+
+[node name="Node2D" type="Node2D" unique_id=1893233345 node_paths=PackedStringArray("health_bar", "kill_label", "points_label", "mag_label", "reserve_ammo_label", "debug_shoot_label", "debug_damage_label", "upgrade_ui", "shoot_cooldown_button", "shoot_cooldown_label", "player_spawn")]
 script = ExtResource("1_gklfi")
 health_bar = NodePath("GameUI/health-bar")
 kill_label = NodePath("GameUI/kills-label")
@@ -96,14 +110,7 @@ debug_damage_label = NodePath("DebugUI/damage-label-holder/damage-label")
 upgrade_ui = NodePath("UpgradeUI")
 shoot_cooldown_button = NodePath("UpgradeUI/upgrade-shoot-cooldown-button")
 shoot_cooldown_label = NodePath("UpgradeUI/shoot-cooldown-stat")
-player = NodePath("CharacterBody2D")
-
-[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=1622978021]
-collision_layer = 2
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=2103379237]
-position = Vector2(617, 1633.5)
-shape = SubResource("RectangleShape2D_evtob")
+player_spawn = NodePath("PlayerSpawn")
 
 [node name="CharacterBody2D" parent="." unique_id=987319902 instance=ExtResource("1_4exd7")]
 top_level = true
@@ -112,6 +119,7 @@ bullet_scene = null
 
 [node name="Camera2D" type="Camera2D" parent="CharacterBody2D" unique_id=66485005]
 position = Vector2(4, 0)
+ignore_rotation = false
 
 [node name="Node2D5" parent="." unique_id=345531923 instance=ExtResource("2_ic6my")]
 position = Vector2(318, 494)
@@ -120,7 +128,7 @@ position = Vector2(318, 494)
 offset_left = -2012.0
 offset_top = 494.0
 offset_right = 3279.0
-offset_bottom = 2803.0
+offset_bottom = 695.0
 color = Color(0.781407, 0.781407, 0.78140694, 1)
 
 [node name="DebugUI" type="CanvasLayer" parent="." unique_id=1653886899]
@@ -166,6 +174,7 @@ position = Vector2(596, 329)
 spawn_points = [NodePath("../LootPoints/Point1"), NodePath("../LootPoints/Point2"), NodePath("../LootPoints/Point3"), NodePath("../LootPoints/Point4")]
 
 [node name="LootPoints" type="Node2D" parent="." unique_id=1523347074]
+visible = false
 
 [node name="Point1" type="Marker2D" parent="LootPoints" unique_id=24834021]
 position = Vector2(405, 473)
@@ -185,26 +194,17 @@ metadata/occupied = false
 
 [node name="GameUI" type="CanvasLayer" parent="." unique_id=604225772]
 
-[node name="wave-label-holder" type="TextureRect" parent="GameUI" unique_id=869718345]
+[node name="time-label-holder" type="TextureRect" parent="GameUI" unique_id=869718345]
 offset_left = 472.0
 offset_top = 9.0
 offset_right = 673.0
 offset_bottom = 76.0
 texture = ExtResource("8_tcqsn")
 
-[node name="Label" type="Label" parent="GameUI/wave-label-holder" unique_id=133157022]
-layout_mode = 0
-offset_left = 27.0
-offset_top = 10.0
-offset_right = 180.0
-offset_bottom = 60.0
-text = "Wave: 1"
-label_settings = SubResource("LabelSettings_l3elg")
-
 [node name="health-bar" type="ProgressBar" parent="GameUI" unique_id=718607118]
 offset_left = 243.0
 offset_top = 22.0
-offset_right = 467.0
+offset_right = 435.0
 offset_bottom = 33.0
 theme_override_styles/background = SubResource("StyleBoxFlat_wetln")
 theme_override_styles/fill = SubResource("StyleBoxFlat_ooohs")
@@ -282,28 +282,34 @@ offset_bottom = 56.0
 text = "10"
 label_settings = SubResource("LabelSettings_3i82n")
 
-[node name="TextureRect" type="TextureRect" parent="GameUI" unique_id=1740417410]
+[node name="upgrade-label-holder" type="TextureRect" parent="GameUI" unique_id=1740417410]
 offset_left = 507.0
 offset_top = 587.0
-offset_right = 889.0
+offset_right = 714.0
 offset_bottom = 638.0
 texture = ExtResource("5_wrnl3")
 
 [node name="damage-label2" type="Label" parent="GameUI" unique_id=886814961]
-offset_left = 511.0
-offset_top = 592.0
-offset_right = 716.0
-offset_bottom = 634.0
-text = "[U] Toggle Upgrade Frame"
+offset_left = 515.0
+offset_top = 594.0
+offset_right = 714.0
+offset_bottom = 636.0
+text = "[U] Upgrades"
 label_settings = SubResource("LabelSettings_6q6d4")
 
-[node name="UpgradeUI" type="CanvasLayer" parent="." unique_id=1804754877 node_paths=PackedStringArray("shoot_cooldown_upgrade", "point_per_kill_upgrade", "point_per_kill_stat", "shoot_cooldown_stat")]
+[node name="timer-label" type="Label" parent="GameUI" unique_id=133157022]
+offset_left = 513.0
+offset_top = 15.0
+offset_right = 631.0
+offset_bottom = 65.0
+text = "1:00"
+label_settings = SubResource("LabelSettings_l3elg")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="UpgradeUI" type="CanvasLayer" parent="." unique_id=1804754877]
 visible = false
 script = ExtResource("15_yoi1k")
-shoot_cooldown_upgrade = NodePath("upgrade-shoot-cooldown-button")
-point_per_kill_upgrade = NodePath("upgrade-point-per-kill-button")
-point_per_kill_stat = NodePath("point-per-kill-stat")
-shoot_cooldown_stat = NodePath("shoot-cooldown-stat")
 
 [node name="frame-holder" type="TextureRect" parent="UpgradeUI" unique_id=1492905774]
 offset_left = 299.0
@@ -378,6 +384,8 @@ offset_top = 390.0
 offset_right = 521.0
 offset_bottom = 429.0
 theme_override_styles/normal = SubResource("StyleBoxFlat_5xwn4")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_l1g8i")
+theme_override_styles/hover = SubResource("StyleBoxFlat_8qpon")
 
 [node name="shoot-cooldown-text2" type="Label" parent="UpgradeUI" unique_id=1629261241]
 offset_left = 335.0
@@ -393,6 +401,8 @@ offset_top = 391.0
 offset_right = 792.0
 offset_bottom = 430.0
 theme_override_styles/normal = SubResource("StyleBoxFlat_5xwn4")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_3mf5k")
+theme_override_styles/hover = SubResource("StyleBoxFlat_r2ue6")
 
 [node name="shoot-cooldown-text4" type="Label" parent="UpgradeUI" unique_id=1179401314]
 offset_left = 606.0
@@ -417,9 +427,27 @@ offset_bottom = 169.0
 text = "[ESC] Exit"
 label_settings = SubResource("LabelSettings_l1g8i")
 
-[node name="UpgradeManager" type="Node2D" parent="." unique_id=1616191906]
-script = ExtResource("18_3i82n")
+[node name="GameTimer" type="Timer" parent="." unique_id=1562646710]
+wait_time = 5.0
+
+[node name="PlayerSpawn" type="Marker2D" parent="." unique_id=1356912008]
+position = Vector2(315, 455)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=820828298]
+collision_layer = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=325762468]
+position = Vector2(318, 1783)
+shape = SubResource("RectangleShape2D_5xwn4")
+
+[node name="Area2D" type="Area2D" parent="." unique_id=126961748]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=160171759]
+position = Vector2(313.5, 1786)
+shape = SubResource("RectangleShape2D_3i82n")
 
 [connection signal="pressed" from="UpgradeUI/upgrade-shoot-cooldown-button" to="UpgradeUI" method="_upgrade_shoot_cooldown"]
 [connection signal="pressed" from="UpgradeUI/upgrade-point-per-kill-button" to="UpgradeUI" method="_upgrade_point_per_kill"]
 [connection signal="pressed" from="UpgradeUI/upgrade-close" to="UpgradeUI" method="_exit"]
+[connection signal="timeout" from="GameTimer" to="." method="_game_time_over"]
+[connection signal="area_entered" from="Area2D" to="." method="_bullet_floor_touch"]

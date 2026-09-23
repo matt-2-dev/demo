@@ -59,7 +59,7 @@ func _process(delta: float) -> void:
 			reload()
 	# UPGRADE UI
 	if Input.is_action_just_pressed("ui_upgrade"):
-		GameManager.upgrade_ui.visible = !GameManager.upgrade_ui.visible
+		GameManager.upgrade_ui.visible = true
 func reload():
 	var mag_limit = 10
 	var needed = mag_limit - ammo

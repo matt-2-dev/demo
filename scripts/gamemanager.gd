@@ -17,12 +17,13 @@ extends Node2D
 @export var damage: bool
 @export var shoot: bool
 # Export Variables for CharacterBody2D
-@export var player: CharacterBody2D
+var player
+var player_scene = load("res://scenes/player.tscn")
+@export var player_spawn: Marker2D
 # Functions
-func _process(delta: float) -> void:
-	# this will be used for the winning scene with a timer being added at the top hopefully godot doesnt annoy me with it
-	pass
 func _ready():
+	player = get_tree().get_root().get_node("CharacterBody2D")
+	get_tree().current_scene.get_node("GameTimer").start()
 	#export variables
 	GameManager.health_bar = $"GameUI/health-bar"
 	GameManager.points_label = $"GameUI/points-label"
@@ -34,7 +35,25 @@ func _ready():
 	GameManager.shoot_cooldown_button = $"UpgradeUI/upgrade-shoot-cooldown-button"
 	GameManager.shoot_cooldown_label = $"UpgradeUI/shoot-cooldown-stat"
 	GameManager.player = $CharacterBody2D
-# // Points
+func _process(delta: float) -> void:
+	get_tree().current_scene.get_node("GameUI").get_node("timer-label").text = str(ceil(get_tree().current_scene.get_node("GameTimer").time_left))
+	pass
+
+# // Player Respawn
+func respawn_player():
+	var old_player = get_node_or_null("CharacterBody2D")
+	if old_player:
+		old_player.queue_free()
+	var new_player = player_scene.instantiate()
+	var new_camera = Camera2D.new()
+	new_camera.zoom = Vector2(1,1)
+	new_camera.position = Vector2(4,0)
+	new_camera.enabled = true
+	new_player.add_child(new_camera)
+	new_player.position = player_spawn.position
+	new_player.name = "CharacterBody2D"
+	GameManager.player = new_player
+	add_child(new_player)
 func give_point(amount) -> void:
 	#normal
 	player.points += amount
@@ -96,3 +115,12 @@ func get_loot(label: Label):
 			"item": item,
 			"amount": amount
 		}
+
+func _game_time_over() -> void:
+	GameManager.give_point(20)
+	respawn_player()
+
+
+func _bullet_floor_touch(area: Area2D) -> void:
+	if area.is_in_group("bullet"):
+		area.queue_free()

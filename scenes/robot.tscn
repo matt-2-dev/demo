@@ -1,7 +1,6 @@
 [gd_scene format=3 uid="uid://rh72uciyx4b8"]
 
 [ext_resource type="Script" uid="uid://d10ukrvhumdbg" path="res://scripts/robot.gd" id="1_br0rw"]
-[ext_resource type="PackedScene" uid="uid://dlbbmsoqyym3j" path="res://scenes/lootdrop.tscn" id="2_ykvnc"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ykvnc"]
 size = Vector2(124, 135)
@@ -30,7 +29,6 @@ collision_layer = 4
 collision_mask = 2
 script = ExtResource("1_br0rw")
 health_bar = NodePath("Control/ProgressBar")
-loot_scene = ExtResource("2_ykvnc")
 
 [node name="ColorRect" type="ColorRect" parent="." unique_id=2092103073]
 offset_left = -39.0

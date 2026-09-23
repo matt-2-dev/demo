@@ -10,6 +10,7 @@ spawn_timer = NodePath("Timer")
 robot = ExtResource("2_6v6yy")
 
 [node name="Timer" type="Timer" parent="." unique_id=808558959]
+wait_time = 0.7
 autostart = true
 
 [node name="Floor3" type="ColorRect" parent="." unique_id=998335602]
